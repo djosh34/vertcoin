@@ -18,20 +18,20 @@ static CBigNum bnProofOfWorkLimit(~uint256_old(0) >> 20);
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
-    static const int64_t        BlocksTargetSpacing  = 2.5 * 60; // 2.5 minutes
+    static const int64_t        BlocksTargetSpacing  = 0.5 * 60; // 2.5 minutes
     unsigned int                TimeDaySeconds       = 60 * 60 * 24;
     int64_t                     PastSecondsMin       = TimeDaySeconds * 0.25;
     int64_t                     PastSecondsMax       = TimeDaySeconds * 7;
     uint64_t                    PastBlocksMin        = PastSecondsMin / BlocksTargetSpacing;
     uint64_t                    PastBlocksMax        = PastSecondsMax / BlocksTargetSpacing;
-    
+
     const int nHeight = pindexLast->nHeight + 1;
 
     if(params.testnet) {
         if(nHeight < 2116) {
 	    	return GetNextWorkRequired_Bitcoin(pindexLast, pblock, params);
 	    }
-	    
+
   	    // testnet to 12 block difficulty adjustment interval
         if(nHeight % 12 != 0)
         {
@@ -47,7 +47,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
        	    return 0x1e0ffff0;
 	    }
     }
-    
+
     return KimotoGravityWell(pindexLast, pblock, BlocksTargetSpacing, PastBlocksMin, PastBlocksMax, params);
 }
 
@@ -177,7 +177,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     if (bnNew > bnPowLimit)
         bnNew = bnPowLimit;
-        
+
     return bnNew.GetCompact();
 }
 
