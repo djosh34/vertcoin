@@ -120,9 +120,8 @@ public:
 
         genesis = CreateGenesisBlock(1516832269, 5749262, 0x00000420, 1, 0 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        fprintf(stderr, "%s",consensus.hashGenesisBlock.ToString().c_str());
         assert(genesis.hashMerkleRoot == uint256S("0x4b14699d6b5214fa72065afed77fc031c398198b65599a2881de53c696730dd5"));
-        assert(consensus.hashGenesisBlock == uint256S("0x4d96a915f49d40b1e5c2844d1ee2dccb90013a990ccea12c492d22110489f0c4"));
+        assert(consensus.hashGenesisBlock == uint256S("0xb5464d3300c79133317d7ee1a5501b5007064f1449e8896d80b4a0326f6b5da7"));
 
 
 
@@ -217,8 +216,10 @@ public:
         nDefaultPort = 15889;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1481291250, 915027, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1516833413, 915027, 0x1e0ffff0, 1, 0 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
+        fprintf(stderr, "hashMerkleRoot: %s\n",genesis.hashMerkleRoot.ToString().c_str());
+        fprintf(stderr, "hashGenesisBlock: %s\n",consensus.hashGenesisBlock.ToString().c_str());
         assert(consensus.hashGenesisBlock == uint256S("0xcee8f24feb7a64c8f07916976aa4855decac79b6741a8ec2e32e2747497ad2c9"));
         assert(genesis.hashMerkleRoot == uint256S("0x4af38ca0e323c0a5226208a73b7589a52c030f234810cf51e13e3249fc0123e7"));
 
